@@ -29,8 +29,7 @@ router.post("/user/signup", async (req, res) => {
       hash: hash,
     });
     await newUser.save();
-    // console.log(newUser);
-    // res.status(200).json({ token, email, username, _id: userCheck._id });
+
     const response = {
       _id: newUser._id,
       account: newUser.account,
