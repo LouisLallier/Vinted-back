@@ -7,9 +7,9 @@ const Offer = require("../models/Offer");
 const { debugLog } = require("express-fileupload/lib/utilities");
 
 cloudinary.config({
-  cloud_name: "dpeyhfmjh",
-  api_key: "912523765999686",
-  api_secret: "t9buLY0DMKAcgYzlCsEFwwv1t3E",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
 });
 
