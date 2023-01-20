@@ -16,6 +16,6 @@ mongoose.connect(process.env.MONGODB_URI);
 app.use(userRoutes);
 app.use(offerRoutes);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("SERVER IS RUNNING 🏃");
 });
