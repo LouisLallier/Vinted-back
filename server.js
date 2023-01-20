@@ -16,6 +16,10 @@ mongoose.connect(process.env.MONGODB_URI);
 app.use(userRoutes);
 app.use(offerRoutes);
 
+app.get("/", (req, res) => {
+  res.json("Bienvenue sur mon serveur");
+});
+
 app.listen(process.env.PORT, () => {
   console.log("SERVER IS RUNNING 🏃");
 });
