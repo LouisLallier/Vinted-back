@@ -11,6 +11,7 @@
     "express-fileupload": "^1.4.0",
     "mongoose": "^6.8.3",
     "nodemon": "^2.0.20",
+    "stripe": "^11.10.0",
     "uid2": "^1.0.0"
   }
 }

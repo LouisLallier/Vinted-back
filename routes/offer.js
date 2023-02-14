@@ -4,7 +4,9 @@ const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const Offer = require("../models/Offer");
-const { debugLog } = require("express-fileupload/lib/utilities");
+const stripe = require("stripe")(
+  "sk_test_51MbSLiC5fuR6mfthGYWDTxOXE4ehomQGmwupZwKhxbpgAi6BO0PS1L9SE82t8x3jdfLDkneDmOJ8YGgiSf9owhpf00IoFF17ZD"
+);
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -176,6 +178,25 @@ router.get("/offer/:id", async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+});
+
+router.post("/pay", async (req, res) => {
+  // Réception du token créer via l'API Stripe depuis le Frontend
+  const stripeToken = req.body.stripeToken;
+  // Créer la transaction
+  const response = await stripe.charges.create({
+    amount: 2000,
+    currency: "eur",
+    description: "La description de l'objet acheté",
+    // On envoie ici le token
+    source: stripeToken,
+  });
+  console.log(response.status);
+
+  // TODO
+  // Sauvegarder la transaction dans une BDD MongoDB
+
+  res.json(response);
 });
 
 module.exports = router;
